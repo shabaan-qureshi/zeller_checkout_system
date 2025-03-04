@@ -1,21 +1,20 @@
 import { expect } from 'chai';
-import { Checkout } from '../src/Checkout';
-import { products } from '../src/index';
+import { createCheckout } from '../src/test-utls/checkoutTestUtils';  
+import { PricingRule  } from '../src/pricing-rules/PricingRule';
 import { AppleTvDiscountRule } from '../src/pricing-rules/AppleTvDiscountRule';
 import { SuperIpadBulkDiscountRule } from '../src/pricing-rules/SuperIpadBulkDiscountRule';
 
 describe('Checkout', () => {
+  const pricingRules: PricingRule[] = [
+    new AppleTvDiscountRule(),
+    new SuperIpadBulkDiscountRule()
+  ];
 
   describe('Apple TV 3-for-2 deal', () => {
 
     context('when less than 3 Apple TVs are scanned', () => {
       it('should not apply the 3-for-2 deal with only two Apple TVs', () => {
-        const pricingRules = [
-          new AppleTvDiscountRule(),
-          new SuperIpadBulkDiscountRule()
-        ];
-
-        const checkout = new Checkout(pricingRules, products);
+        const checkout = createCheckout(pricingRules); 
         checkout.scan('atv');
         checkout.scan('atv');
         checkout.scan('vga');
@@ -26,12 +25,7 @@ describe('Checkout', () => {
 
     context('when exactly 3 Apple TVs are scanned', () => {
       it('should apply the 3-for-2 deal with three Apple TVs', () => {
-        const pricingRules = [
-          new AppleTvDiscountRule(),
-          new SuperIpadBulkDiscountRule()
-        ];
-
-        const checkout = new Checkout(pricingRules, products);
+        const checkout = createCheckout(pricingRules); 
         checkout.scan('atv');
         checkout.scan('atv');
         checkout.scan('atv');
@@ -43,12 +37,7 @@ describe('Checkout', () => {
 
     context('when 6 Apple TVs are scanned', () => {
       it('should apply the 3-for-2 deal twice for six Apple TVs', () => {
-        const pricingRules = [
-          new AppleTvDiscountRule(),
-          new SuperIpadBulkDiscountRule()
-        ];
-
-        const checkout = new Checkout(pricingRules, products);
+        const checkout = createCheckout(pricingRules); 
         checkout.scan('atv');
         checkout.scan('atv');
         checkout.scan('atv');
@@ -67,12 +56,7 @@ describe('Checkout', () => {
 
     context('when 5 or more Super iPads are scanned', () => {
       it('should apply the bulk discount on Super iPads', () => {
-        const pricingRules = [
-          new AppleTvDiscountRule(),
-          new SuperIpadBulkDiscountRule()
-        ];
-
-        const checkout = new Checkout(pricingRules, products);
+        const checkout = createCheckout(pricingRules); 
         checkout.scan('atv');
         checkout.scan('ipd');
         checkout.scan('ipd');
@@ -87,12 +71,7 @@ describe('Checkout', () => {
 
     context('when less than 5 Super iPads are scanned', () => {
       it('should not apply the bulk discount on Super iPads', () => {
-        const pricingRules = [
-          new AppleTvDiscountRule(),
-          new SuperIpadBulkDiscountRule()
-        ];
-
-        const checkout = new Checkout(pricingRules, products);
+        const checkout = createCheckout(pricingRules); 
         checkout.scan('atv');
         checkout.scan('ipd');
         checkout.scan('ipd');

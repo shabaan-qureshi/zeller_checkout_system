@@ -27,19 +27,16 @@ export class Checkout {
   }
 
   total(): number {
-    // Calculate base price (sum of all products at their regular price)
     const baseTotal = this.cart.reduce(
       (sum, item) => sum + item.product.price * item.quantity,
       0
     );
 
-    // Apply all pricing rules and sum up the discounts
     const totalDiscount = this.pricingRules.reduce(
       (sum, rule) => sum + rule.apply(this.cart),
       0
     );
 
-    // Return the total, rounded to 2 decimal places
     return parseFloat((baseTotal - totalDiscount).toFixed(2));
   }
 }
