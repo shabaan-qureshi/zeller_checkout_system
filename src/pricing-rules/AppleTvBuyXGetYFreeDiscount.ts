@@ -4,7 +4,7 @@ import { DISCOUNT_RULES_CONSTANTS } from '../config/discountRulesConstants';
 
 const { APPLE_TV_BUY_X_GET_Y_FREE } = DISCOUNT_RULES_CONSTANTS;
 
-export class AppleTvDiscountRule implements PricingRule {
+export class AppleTvBuyXGetYFreeDiscount implements PricingRule {
   apply(items: CartItem[]): number {
     const appleTVItems = items.filter(item => item.product.sku === 'atv');
     const totalQuantity = appleTVItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -19,3 +19,5 @@ export class AppleTvDiscountRule implements PricingRule {
     return 0;
   }
 }
+
+

@@ -1,14 +1,15 @@
 import { expect } from 'chai';
 import { createCheckout } from '../src/test-utls/checkoutTestUtils';  
 import { PricingRule  } from '../src/pricing-rules/PricingRule';
-import { AppleTvDiscountRule } from '../src/pricing-rules/AppleTvDiscountRule';
+import { AppleTvBuyXGetYFreeDiscount } from '../src/pricing-rules/AppleTvBuyXGetYFreeDiscount';
 import { SuperIpadBulkDiscountRule } from '../src/pricing-rules/SuperIpadBulkDiscountRule';
 
 describe('Checkout', () => {
+
   describe('Apple TV 3-for-2 deal', () => {
 
     const pricingRules: PricingRule[] = [
-      new AppleTvDiscountRule()
+      new AppleTvBuyXGetYFreeDiscount()
     ];
 
     context('when less than 3 Apple TVs are scanned', () => {
@@ -19,6 +20,8 @@ describe('Checkout', () => {
         checkout.scan('vga');
 
         expect(checkout.total()).to.equal(249.00);
+        const cartItems = checkout.getCartItems()
+        expect(cartItems.length).to.equal(2)
       });
     });
 
@@ -90,7 +93,7 @@ describe('Checkout', () => {
   describe('Apple TV 3-for-2 deal and Super iPad bulk discount together', () => {
 
     const pricingRules: PricingRule[] = [
-      new AppleTvDiscountRule(),
+      new AppleTvBuyXGetYFreeDiscount(),
       new SuperIpadBulkDiscountRule()
     ];
 
@@ -112,4 +115,21 @@ describe('Checkout', () => {
       });
     });
   });
+
+  describe('Checkout with an empty cart', () => {
+    const pricingRules: PricingRule[] = [
+      new AppleTvBuyXGetYFreeDiscount(),
+      new SuperIpadBulkDiscountRule()
+    ];
+  
+    context('when no items are scanned', () => {
+      it('should return a total of 0', () => {
+        const checkout = createCheckout(pricingRules); 
+        expect(checkout.total()).to.equal(0);
+      });
+    });
+  });
+
 });
+
+
