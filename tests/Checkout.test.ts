@@ -5,12 +5,11 @@ import { AppleTvDiscountRule } from '../src/pricing-rules/AppleTvDiscountRule';
 import { SuperIpadBulkDiscountRule } from '../src/pricing-rules/SuperIpadBulkDiscountRule';
 
 describe('Checkout', () => {
-  const pricingRules: PricingRule[] = [
-    new AppleTvDiscountRule(),
-    new SuperIpadBulkDiscountRule()
-  ];
-
   describe('Apple TV 3-for-2 deal', () => {
+
+    const pricingRules: PricingRule[] = [
+      new AppleTvDiscountRule()
+    ];
 
     context('when less than 3 Apple TVs are scanned', () => {
       it('should not apply the 3-for-2 deal with only two Apple TVs', () => {
@@ -25,7 +24,7 @@ describe('Checkout', () => {
 
     context('when exactly 3 Apple TVs are scanned', () => {
       it('should apply the 3-for-2 deal with three Apple TVs', () => {
-        const checkout = createCheckout(pricingRules); 
+        const checkout = createCheckout(pricingRules);
         checkout.scan('atv');
         checkout.scan('atv');
         checkout.scan('atv');
@@ -54,6 +53,10 @@ describe('Checkout', () => {
 
   describe('Super iPad bulk discount', () => {
 
+    const pricingRules: PricingRule[] = [
+      new SuperIpadBulkDiscountRule()
+    ];
+
     context('when 5 or more Super iPads are scanned', () => {
       it('should apply the bulk discount on Super iPads', () => {
         const checkout = createCheckout(pricingRules); 
@@ -80,6 +83,32 @@ describe('Checkout', () => {
         checkout.scan('ipd');
 
         expect(checkout.total()).to.equal(2418.96);
+      });
+    });
+  });
+
+  describe('Apple TV 3-for-2 deal and Super iPad bulk discount together', () => {
+
+    const pricingRules: PricingRule[] = [
+      new AppleTvDiscountRule(),
+      new SuperIpadBulkDiscountRule()
+    ];
+
+    context('when both the 3-for-2 deal and Super iPad bulk discount are applicable', () => {
+      it('should apply the Apple TV 3-for-2 deal and the bulk discount on Super iPads', () => {
+        const checkout = createCheckout(pricingRules); 
+        checkout.scan('atv');
+        checkout.scan('atv');
+        checkout.scan('atv');
+        checkout.scan('atv');
+        checkout.scan('ipd');
+        checkout.scan('ipd');
+        checkout.scan('atv');
+        checkout.scan('ipd');
+        checkout.scan('ipd');
+        checkout.scan('ipd');
+
+        expect(checkout.total()).to.equal(2937.95);
       });
     });
   });
