@@ -12,6 +12,10 @@ export class Checkout {
     this.products = new Map(products.map(product => [product.sku, product]));
   }
 
+  getCartItems(): CartItem[] {
+    return this.cart;
+  }
+
   scan(sku: string): void {
     const product = this.products.get(sku);
     if (!product) {
