@@ -1,6 +1,6 @@
 # Checkout System
 
-This project implements a checkout system for a computer store that supports multiple product discounts, including a "3-for-2" deal on Apple TVs and bulk discounts for Super iPads. The system calculates the total price based on the applied discounts. For more information, please see [https://github.com/zeller-public/code-challenge-bff](Zeller Coding Challenge)
+This project implements a checkout system for a computer store that supports multiple product discounts, including a "3-for-2" deal on Apple TVs and bulk discounts for Super iPads. The system calculates the total price based on the applied discounts. For more information, please see [https://github.com/zeller-public/code-challenge-bff]
 
 ## Features
 
@@ -10,18 +10,17 @@ This project implements a checkout system for a computer store that supports mul
 
 ## Requirements
 
-- **TypeScript**: This project is written in TypeScript. Make sure you have TypeScript installed globally or use `npx` to run it.
+- **TypeScript**: This project is written in TypeScript. Make sure you have TypeScript installed globally. To verify after installation, run `npx -v` 
 
-The project uses TypeScript version `^5.1.6`. If you're setting up the project, ensure you're using a compatible version.
-
+The project uses TypeScript version `^5.1.6`. If you're setting up the project, ensure you're using this version or higher.
 
 ## Installation
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/checkout-system.git
-    cd checkout-system
+    git clone https://github.com/shabaan-qureshi/zeller_checkout_system.git
+    cd zeller_checkout_system
     ```
 
 2. Install the dependencies:
@@ -41,6 +40,15 @@ The project uses TypeScript version `^5.1.6`. If you're setting up the project, 
     ```bash
     npm test
     ```
+
+## Project Structure
+
+- **/models**: Contains product and cart-related models.
+- **/pricing-rules**: Contains different pricing rules such as discounts and promotions.
+- **/config**:  Holds constants like discount rules and product data.
+- **/Checkout.ts**: Contains the Checkout class which handles cart management, applying pricing rules, and calculating the total price.
+- **/test-utils**: Contains helper functions for testing the checkout process.
+- **/test**: Contains unit tests to ensure the correct behavior of the checkout system.
 
 ## Usage
 
@@ -90,20 +98,8 @@ This project uses **Chai** and **Mocha** for unit testing. To run the tests:
 
 The tests cover various scenarios, including:
 
-Apple TV 3-for-2 deal with varying quantities of Apple TVs.
-Super iPad bulk discount when purchasing multiple iPads.
-Combined application of both the Apple TV 3-for-2 deal and the Super iPad bulk discount.
-An empty cart scenario to ensure proper handling when no items are scanned.
-
-## Project Structure
-
-- **/models**: Contains product and cart-related models.
-- **/pricing-rules**: Contains different pricing rules such as discounts and promotions.
-- **/config**:  Holds constants like discount rules and product data.
-- **/Checkout.ts**: Contains the Checkout class which handles cart management, applying pricing rules, and calculating the total price.
-- **/test-utils**: Contains helper functions for testing the checkout process.
-- **/test**: Contains unit tests to ensure the correct behavior of the checkout system.
-
-
-
+- Apple TV 3-for-2 deal with varying quantities of Apple TVs.  
+- Super iPad bulk discount when purchasing multiple iPads.  
+- Combined application of both the Apple TV 3-for-2 deal and the Super iPad bulk discount.  
+- An empty cart scenario to ensure proper handling when no items are scanned.
 
