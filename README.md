@@ -25,9 +25,11 @@ The project uses TypeScript version `^5.1.6`. If you're setting up the project, 
 
 2. Install the dependencies:
 
-    ```bash
-    npm install
-    ```
+- Verify if npm is installed by running `npm -v`
+- If npm is not installed, download and install Node.js based on your operating system: https://nodejs.org/en/download
+- Once Node.js is installed, navigate to the project directory using `cd zeller_checkout_system` in your terminal
+- Run `npm install` to install the project dependencies
+
 
 3. Compile TypeScript files:
 
