@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { createCheckout } from '../src/test-utls/checkoutTestUtils';  
+import { createCheckout } from '../src/test-utils/checkoutTestUtils';  
 import { PricingRule  } from '../src/pricing-rules/PricingRule';
 import { AppleTvBuyXGetYFreeDiscount } from '../src/pricing-rules/AppleTvBuyXGetYFreeDiscount';
 import { SuperIpadBulkDiscountRule } from '../src/pricing-rules/SuperIpadBulkDiscountRule';

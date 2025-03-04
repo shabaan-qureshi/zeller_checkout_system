@@ -55,11 +55,12 @@ The project uses TypeScript version `^5.1.6`. If you're setting up the project, 
 ### Example 1: Apple TV 3-for-2 deal
 
 ```typescript
-import { Checkout } from './Checkout';
-import { AppleTvBuyXGetYFreeDiscount } from './pricing-rules/AppleTvBuyXGetYFreeDiscount';
+import { createCheckout } from '../src/test-utls/checkoutTestUtils';  
+import { PricingRule  } from '../src/pricing-rules/PricingRule';
+import { AppleTvBuyXGetYFreeDiscount } from '../src/pricing-rules/AppleTvBuyXGetYFreeDiscount';
 
 const pricingRules = [new AppleTvBuyXGetYFreeDiscount()];
-const checkout = new Checkout(pricingRules);
+const checkout = createCheckout(pricingRules);
 
 checkout.scan('atv');
 checkout.scan('atv');
@@ -71,11 +72,13 @@ console.log(checkout.total()); // Output will be 219.00
 ### Example 2: Super iPad Bulk Discount
 
 ```typescript
-import { Checkout } from './Checkout';
-import { SuperIpadBulkDiscountRule } from './pricing-rules/SuperIpadBulkDiscountRule';
+import { createCheckout } from '../src/test-utls/checkoutTestUtils';  
+import { PricingRule  } from '../src/pricing-rules/PricingRule';
+import { AppleTvBuyXGetYFreeDiscount } from '../src/pricing-rules/AppleTvBuyXGetYFreeDiscount';
+import { SuperIpadBulkDiscountRule } from '../src/pricing-rules/SuperIpadBulkDiscountRule';
 
 const pricingRules = [new SuperIpadBulkDiscountRule()];
-const checkout = new Checkout(pricingRules);
+const checkout = createCheckout(pricingRules);
 
 checkout.scan('ipd');
 checkout.scan('ipd');
